@@ -1,0 +1,66 @@
+{
+    "name": "arifje/craft-slug-to-title",
+    "description": "Keeps the slug of entries, categories and Commerce products in sync with their title.",
+    "type": "craft-plugin",
+    "keywords": [
+        "craft",
+        "cms",
+        "craftcms",
+        "craft-plugin",
+        "slug",
+        "title"
+    ],
+    "support": {
+        "docs": "https://github.com/arifje/craft-slug-to-title/blob/main/README.md",
+        "issues": "https://github.com/arifje/craft-slug-to-title/issues",
+        "source": "https://github.com/arifje/craft-slug-to-title"
+    },
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "arifje",
+            "homepage": "https://github.com/arifje"
+        }
+    ],
+    "require": {
+        "php": "^8.2",
+        "craftcms/cms": "^5.0.0"
+    },
+    "require-dev": {
+        "craftcms/commerce": "^5.0.0",
+        "craftcms/ecs": "dev-main",
+        "craftcms/phpstan": "dev-main",
+        "phpstan/phpstan": "^2.1"
+    },
+    "autoload": {
+        "psr-4": {
+            "arifje\\slugtotitle\\": "src/"
+        }
+    },
+    "scripts": {
+        "check-cs": "ecs check --ansi",
+        "fix-cs": "ecs check --ansi --fix",
+        "phpstan": "phpstan --memory-limit=1G"
+    },
+    "extra": {
+        "name": "Slug to Title",
+        "handle": "slug-to-title",
+        "developer": "arifje",
+        "documentationUrl": "https://github.com/arifje/craft-slug-to-title/blob/main/README.md",
+        "changelogUrl": "https://raw.githubusercontent.com/arifje/craft-slug-to-title/main/CHANGELOG.md",
+        "class": "arifje\\slugtotitle\\SlugToTitle",
+        "craftcms-claude-skills": "1.18.0"
+    },
+    "config": {
+        "sort-packages": true,
+        "platform": {
+            "php": "8.2"
+        },
+        "allow-plugins": {
+            "yiisoft/yii2-composer": true,
+            "craftcms/plugin-installer": true
+        }
+    },
+    "minimum-stability": "dev",
+    "prefer-stable": true
+}

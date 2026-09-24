@@ -1,0 +1,5 @@
+input.slug-to-title-locked {
+  color: var(--light-text-color, #606d7b);
+  background-color: var(--gray-050, #f3f7fc);
+  cursor: default;
+}

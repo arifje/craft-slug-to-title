@@ -1,0 +1,35 @@
+{# @var settings \arifje\slugtotitle\models\Settings #}
+{% import '_includes/forms' as forms %}
+
+<p>{{ 'Choose where slugs follow titles by default. Editors can switch this off for a single element with the toggle below its Slug field.'|t('slug-to-title') }}</p>
+
+{% set groups = [
+    {
+        name: 'sectionUids',
+        label: 'Sections'|t('slug-to-title'),
+        options: sectionOptions,
+        values: settings.sectionUids,
+    },
+    {
+        name: 'categoryGroupUids',
+        label: 'Category Groups'|t('slug-to-title'),
+        options: categoryGroupOptions,
+        values: settings.categoryGroupUids,
+    },
+    {
+        name: 'productTypeUids',
+        label: 'Product Types'|t('slug-to-title'),
+        options: productTypeOptions,
+        values: settings.productTypeUids,
+    },
+] %}
+
+{% for group in groups|filter(group => group.options is not empty) %}
+    {{ forms.checkboxSelectField({
+        label: group.label,
+        name: group.name,
+        options: group.options,
+        values: group.values,
+        showAllOption: false,
+    }) }}
+{% endfor %}
