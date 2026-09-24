@@ -30,7 +30,8 @@
       const titleName = this.$slug.attr('name').replace(/slug(\]?)$/, 'title$1');
       const $title = this.$toggle.closest('form').find(`input[name="${titleName}"]`).first();
       if ($title.length) {
-        this.generator = new Craft.SlugGenerator($title, this.$slug);
+        // The Slug field is hidden while the editor sidebar is collapsed
+        this.generator = new Craft.SlugGenerator($title, this.$slug, {updateWhenHidden: true});
         this.generator.stopListening();
       }
 
