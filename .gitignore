@@ -4,3 +4,7 @@ composer.lock
 .DS_Store
 .idea/
 .claude/settings.local.json
+
+# Dev harness: generated Craft project
+/dev/craft5/*
+!/dev/craft5/.gitkeep

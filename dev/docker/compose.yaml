@@ -1,0 +1,59 @@
+name: craft-slug-to-title-dev
+
+services:
+  db:
+    image: mysql:8.0
+    command: --default-authentication-plugin=mysql_native_password
+    restart: unless-stopped
+    environment:
+      MYSQL_DATABASE: craft
+      MYSQL_USER: craft
+      MYSQL_PASSWORD: craft
+      MYSQL_ROOT_PASSWORD: root
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost", "-uroot", "-proot"]
+      interval: 5s
+      timeout: 5s
+      retries: 30
+    volumes:
+      - dbdata:/var/lib/mysql
+
+  craft:
+    build: .
+    restart: unless-stopped
+    depends_on:
+      db:
+        condition: service_healthy
+    ports:
+      - "8576:80"
+    environment:
+      CRAFT_ENVIRONMENT: dev
+      CRAFT_APP_ID: SlugToTitleDev
+      CRAFT_SECURITY_KEY: "slug-to-title-dev-key-7d3e9a1c5b2f4e6a"
+      CRAFT_DB_DRIVER: mysql
+      CRAFT_DB_SERVER: db
+      CRAFT_DB_PORT: "3306"
+      CRAFT_DB_DATABASE: craft
+      CRAFT_DB_USER: craft
+      CRAFT_DB_PASSWORD: craft
+      CRAFT_DB_TABLE_PREFIX: ""
+      CRAFT_DEV_MODE: "true"
+      CRAFT_ALLOW_ADMIN_CHANGES: "true"
+      CRAFT_DISALLOW_ROBOTS: "true"
+      PRIMARY_SITE_URL: "http://localhost:8576"
+      # Browsers keep idle keep-alive sockets open and PHP's built-in server has no read timeout.
+      PHP_CLI_SERVER_WORKERS: "24"
+      DEV_ADMIN_EMAIL: admin@example.com
+      DEV_ADMIN_USERNAME: admin
+      DEV_ADMIN_PASSWORD: password
+      # Dev-only: CP requests auto-login as the admin (see scripts/app.web.php).
+      DEV_AUTOLOGIN: "1"
+    volumes:
+      - ../craft5:/app
+      - ../..:/plugin
+      - ./scripts:/scripts
+      - composer-cache:/root/.composer/cache
+
+volumes:
+  dbdata:
+  composer-cache:

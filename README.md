@@ -53,6 +53,17 @@ php craft resave/categories --group=topics
 - No toggle is shown for entry and product types that hide the Slug field. Their slugs still follow the default.
 - Revisions are never changed.
 
+## Development
+
+`dev/docker` contains a throwaway Craft 5 + Commerce install for manual testing. It mounts this repository as a Composer path package, so changes show up immediately.
+
+```bash
+cd dev/docker
+docker compose up -d --build
+```
+
+The first start installs Craft into `dev/craft5` and seeds a second site, test sections (News and Events sync by default, Pages doesn't), a category group and a product type. The control panel is at http://localhost:8576/admin and logs you in as `admin` automatically. Reset everything with `docker compose down -v && rm -rf ../craft5/*`.
+
 ## Credits
 
 Inspired by [Slug Equals Title](https://github.com/internetztube/craft-slug-equals-title) by Frederic Köberl. This is an independent implementation.
